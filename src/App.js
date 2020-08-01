@@ -1,26 +1,67 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import HeaderComponent from "./components/HeaderComponent";
+import HomePage from "./pages/HomePage";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import {ROUTE} from "./constants";
+import LoginPage from "./pages/LoginPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import {connect} from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.PureComponent {
+  render() {
+    const {
+      user,
+    } = this.props;
+    return (
+      <div>
+        <div className="container-scroller">
+          <BrowserRouter>
+            <Switch>
+              <PrivateRoute
+                exact
+                path={ROUTE.DASHBOARD}
+                component={HomePage}
+                user={user && user.data}
+              />
+              <Route
+                exact
+                path={ROUTE.LOGIN}
+                component={LoginPage}
+              />
+              <Route
+                component={NotFoundPage}
+              />
+            </Switch>
+          </BrowserRouter>
+          {/*page-body-wrapper ends*/}
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  user: state.userReducer,
+});
+
+export default connect(mapStateToProps, null)(App);
+
+const PrivateRoute = ({component: Component, path, user, ...rest}) => {
+  if (user) {
+    return (
+      <Route {...rest} path={path} render={(props) => (
+        <div className="container-scroller">
+          <HeaderComponent user={user}/>
+          <Component {...props}/>
+        </div>)}/>
+    )
+  }
+  return (
+    <Route
+      {...rest}
+      path={path}
+      render={(props) => <Redirect {...props} to={'/login'}/>
+      }
+    />
+  )
+}
