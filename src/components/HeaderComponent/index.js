@@ -8,7 +8,15 @@ import {
 } from '../../actions/user';
 import {signOut} from "../../utils";
 
-class HeaderComponent extends React.PureComponent {
+class HeaderComponent extends React.Component {
+
+  constructor(state) {
+    super(state);
+    this.state = {
+      sideBarOpened: true,
+    }
+  }
+
   onLogoutSuccess = () => {
     const {
       history,
@@ -17,6 +25,20 @@ class HeaderComponent extends React.PureComponent {
     logoutUser();
     history.push(ROUTE.LOGIN);
   };
+
+  toggleSideBarOpen = () => {
+    const {
+      sideBarOpened,
+    } = this.state;
+    if(sideBarOpened) {
+      document.body.classList.remove("sidebar-icon-only");
+    } else {
+      document.body.classList.add("sidebar-icon-only");
+    }
+    this.setState({
+      sideBarOpened: !sideBarOpened,
+    });
+  }
 
   render() {
     const {
@@ -31,7 +53,7 @@ class HeaderComponent extends React.PureComponent {
             <Link to={ROUTE.DASHBOARD} className="navbar-brand brand-logo-mini"><img src="images/logo-mini.svg"
                                                                                alt="logo"/></Link>
             <button className="navbar-toggler navbar-toggler align-self-center" type="button"
-                    data-toggle="minimize">
+                    onClick={this.toggleSideBarOpen}>
               <span className="mdi mdi-sort-variant"></span>
             </button>
           </div>

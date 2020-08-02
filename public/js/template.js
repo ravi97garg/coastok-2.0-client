@@ -35,7 +35,7 @@
       }
     }
 
-    var current = location.pathname.split("/").slice(-1)[0].replace(/^\/|\/$/g, '');
+    var current = window.location.pathname.split("/").slice(-1)[0].replace(/^\/|\/$/g, '');
     $('.nav li a', sidebar).each(function() {
       var $this = $(this);
       addActiveClass($this);
@@ -50,11 +50,11 @@
 
     //Change sidebar
 
-    $('[data-toggle="minimize"]').on("click", function() {
-      body.toggleClass('sidebar-icon-only');
-    });
+    // $('[data-toggle="minimize"]').on("click", function() {
+    //   body.toggleClass('sidebar-icon-only');
+    // });
 
     //checkbox and radios
     $(".form-check label,.form-radio label").append('<i class="input-helper"></i>');
   });
-})(jQuery);
+})(window.jQuery);
