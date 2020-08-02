@@ -1,4 +1,6 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import {ROUTE} from "../../constants";
 
 class SideBarComponent extends React.Component {
   render() {
@@ -6,10 +8,10 @@ class SideBarComponent extends React.Component {
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <ul className="nav">
           <li className="nav-item">
-            <a className="nav-link" href="index.html">
+            <Link to={ROUTE.HOME} className="nav-link">
               <i className="mdi mdi-home menu-icon"></i>
               <span className="menu-title">Dashboard</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
