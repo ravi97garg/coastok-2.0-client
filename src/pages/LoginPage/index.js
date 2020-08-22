@@ -10,6 +10,7 @@ import {
 } from '../../actions/user';
 import {ROUTE} from "../../constants";
 import {withRouter} from "react-router-dom";
+import './styles.scss';
 
 class LoginPage extends React.PureComponent {
   onLoginSuccess = (userData) => {
@@ -29,14 +30,15 @@ class LoginPage extends React.PureComponent {
           <div className="content-wrapper d-flex align-items-center auth px-0">
             <div className="row w-100 mx-0">
               <div className="col-lg-4 mx-auto">
-                <div className="auth-form-light text-left py-5 px-4 px-sm-5">
+                <div className="auth-form-light text-left py-5 px-4 px-sm-5 auth-form">
                   <div className="brand-logo">
-                    <img src="../../images/logo.svg" alt="logo"/>
+                    <img src="../../images/pp.jpeg" alt="logo"/>
                   </div>
-                  <h4>Hello! let's get started</h4>
+                  <h4>COASTOK Admin Panel</h4>
                   <h6 className="font-weight-light">Sign in to continue.</h6>
                   {/*<a className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"*/}
                   {/*   href="../../index.html">SIGN IN</a>*/}
+                  <br/>
                   <GoogleLogin
                     clientId={GOOGLE_CLIENT_ID}
                     buttonText="Login"
