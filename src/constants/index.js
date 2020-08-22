@@ -9,4 +9,6 @@ export const ROUTE = {
   HOME: '/',
   LOGIN: '/login',
   DASHBOARD: '/',
+  CREATE_AREA: '/createArea',
+  UPDATE_AREA: '/updateArea',
 }

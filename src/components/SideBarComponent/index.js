@@ -16,6 +16,24 @@ class SideBarComponent extends React.Component {
           <li className="nav-item">
             <a className="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                aria-controls="ui-basic">
+              <i className="mdi mdi-image-filter-hdr menu-icon"></i>
+              <span className="menu-title">Manage Area</span>
+              <i className="menu-arrow"></i>
+            </a>
+            <div className="collapse" id="ui-basic">
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item">
+                  <Link to={ROUTE.CREATE_AREA} className="nav-link">Create Area</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={ROUTE.UPDATE_AREA} className="nav-link">Update Area</Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+               aria-controls="ui-basic">
               <i className="mdi mdi-circle-outline menu-icon"></i>
               <span className="menu-title">UI Elements</span>
               <i className="menu-arrow"></i>

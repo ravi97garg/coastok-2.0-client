@@ -6,6 +6,8 @@ import {ROUTE} from "./constants";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import {connect} from "react-redux";
+import CreateArea from "./pages/Area/createArea";
+import UpdateArea from "./pages/Area/updateArea";
 
 class App extends React.PureComponent {
   render() {
@@ -21,6 +23,18 @@ class App extends React.PureComponent {
                 exact
                 path={ROUTE.DASHBOARD}
                 component={HomePage}
+                user={user && user.data}
+              />
+              <PrivateRoute
+                exact
+                path={ROUTE.CREATE_AREA}
+                component={CreateArea}
+                user={user && user.data}
+                />
+              <PrivateRoute
+                exact
+                path={ROUTE.UPDATE_AREA}
+                component={UpdateArea}
                 user={user && user.data}
               />
               <Route
