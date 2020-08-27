@@ -6,16 +6,20 @@ import {ROUTE} from "./constants";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import {connect} from "react-redux";
-import CreateArea from "./pages/Area/createArea";
-import UpdateArea from "./pages/Area/updateArea";
+import CreateArea from "./pages/AreaPage/createArea";
+import UpdateArea from "./pages/AreaPage/updateArea";
+import {LOADER_ON} from "./constants/loader";
+import './App.css';
 
 class App extends React.PureComponent {
   render() {
     const {
       user,
+      loader,
     } = this.props;
+    console.log(loader, user);
     return (
-      <div>
+      <div className="app-container">
         <div className="container-scroller">
           <BrowserRouter>
             <Switch>
@@ -49,6 +53,9 @@ class App extends React.PureComponent {
           </BrowserRouter>
           {/*page-body-wrapper ends*/}
         </div>
+        {this.props.loader.status === LOADER_ON && <div className="loader">
+          Loading...
+        </div>}
       </div>
     )
   }
@@ -56,15 +63,18 @@ class App extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   user: state.userReducer,
+  loader: state.loaderReducer,
 });
 
 export default connect(mapStateToProps, null)(App);
 
 const PrivateRoute = ({component: Component, path, user, ...rest}) => {
-  if (user) {
+  console.log('user', user);
+  if (localStorage.getItem('ADMIN_AUTH_KEY') ||(user && user.userRole === 6) ) {
+    // TODO:Instead of this condition we have to use isLoggedIn util which checks whether token exists, then verify it from backend and save verified userData in redux
     return (
       <Route {...rest} path={path} render={(props) => (
-        <div className="container-scroller">
+        <div>
           <HeaderComponent user={user}/>
           <Component {...props}/>
         </div>)}/>

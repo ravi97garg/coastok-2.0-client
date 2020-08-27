@@ -21,13 +21,16 @@ const areaReducer = (state = initState, action) => {
       };
 
     case CREATE_AREA_SUCCESS:
+      state.data.push(action.payload)
       return {
+        ...state,
         status: ACTION_STATUS.SUCCESS,
-        data: action.payload,
+        data: state.data,
       };
 
     case CREATE_AREA_FAILED:
       return {
+        ...state,
         status: ACTION_STATUS.FAILED,
         error: action.error,
       };

@@ -1,27 +1,56 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import GoogleLogin from "react-google-login";
-import {GOOGLE_CLIENT_ID} from "../../config/google_auth";
 import { connect } from 'react-redux';
-import {
-  loginUserFailed,
-  loginUserSuccess,
-  logoutUser,
-} from '../../actions/user';
 import {ROUTE} from "../../constants";
 import {withRouter} from "react-router-dom";
 import './styles.scss';
+import {loginAdmin} from "../../services/user";
 
-class LoginPage extends React.PureComponent {
+class LoginPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+
   onLoginSuccess = (userData) => {
     const {
       history,
       loginUserSuccess,
     } = this.props;
-    console.log(userData);
+    console.log('userData fetched succesfully');
+    console.log('>>>>>>>>',userData.tokenId);
     loginUserSuccess(userData);
     history.push(ROUTE.DASHBOARD);
   };
+
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  componentDidMount() {
+    const {
+      user
+    } = this.props;
+    if(localStorage.getItem('ADMIN_AUTH_KEY')){
+      this.props.history.push(ROUTE.DASHBOARD);
+    }
+  }
+
+  submitDetails = () => {
+    const {
+      loginAdmin,
+      history,
+    } = this.props;
+    loginAdmin(this.state, (userData) => {
+      if(userData.result.data.userRole === 6)
+      history.push(ROUTE.DASHBOARD);
+    });
+  }
 
   render() {
     return (
@@ -39,14 +68,44 @@ class LoginPage extends React.PureComponent {
                   {/*<a className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"*/}
                   {/*   href="../../index.html">SIGN IN</a>*/}
                   <br/>
-                  <GoogleLogin
-                    clientId={GOOGLE_CLIENT_ID}
-                    buttonText="Login"
-                    onSuccess={this.onLoginSuccess}
-                    onFailure={loginUserFailed}
-                    isSignedIn
-                    cookiePolicy="single_host_origin"
-                  />
+                  {/*<GoogleLogin*/}
+                  {/*  clientId={GOOGLE_CLIENT_ID}*/}
+                  {/*  buttonText="Login"*/}
+                  {/*  onSuccess={this.onLoginSuccess}*/}
+                  {/*  onFailure={this.props.loginUserFailed}*/}
+                  {/*  onRequest={() => {*/}
+                  {/*    console.log('hi user started login');*/}
+                  {/*    this.props.loginUserStarted();*/}
+                  {/*  }}*/}
+                  {/*  isSignedIn*/}
+                  {/*  cookiePolicy="single_host_origin"*/}
+                  {/*/>*/}
+                  <div className="form-group">
+                    <input
+                      type="email"
+                      className="form-control form-control-lg"
+                      // id="exampleInputEmail1"
+                      name={'email'}
+                      value={this.state.email}
+                      onChange={this.handleInputChange}
+                      placeholder="Username"/>
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="password"
+                      className="form-control form-control-lg"
+                      name={'password'}
+                      value={this.state.password}
+                      onChange={this.handleInputChange}
+                      // id="exampleInputPassword1"
+                      placeholder="Password"/>
+                  </div>
+                  <div className="mt-3">
+                    <button
+                      className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                      onClick={this.submitDetails}
+                       >SIGN IN</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -61,15 +120,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  loginUserSuccess,
-  loginUserFailed,
-  logoutUser,
+  loginAdmin,
 };
 
 LoginPage.propTypes = {
   history: PropTypes.object.isRequired,
   loginUserFailed: PropTypes.func.isRequired,
   loginUserSuccess: PropTypes.func.isRequired,
+  loginUserStarted: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
   user: PropTypes.object,
 };

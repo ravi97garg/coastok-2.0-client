@@ -3,28 +3,23 @@ import SideBarComponent from "../../components/SideBarComponent";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import {loginUserFailed, loginUserSuccess, logoutUser} from "../../actions/user";
 import {connect} from "react-redux";
 import {createAreaFailed, createAreaStarted, createAreaSuccess} from "../../actions/area";
+import {USER_CONSTANT} from "../../constants";
 
 class CreateArea extends React.Component {
   constructor(props) {
     super(props);
+    this.resetObj = {
+      areaName: '',
+      areaLeader: '',
+      asstDirector: '',
+    };
     this.state = {
-      users: [{
-        userId: '123',
-        name: 'Jaya Vaman Dev Das'
-      }, {
-        userId: '456',
-        name: 'Shachi Suta Sevak Das'
-      }, {
-        userId: '356',
-        name: 'Deepak Vehnival'
-      }, {
-        userId: '453',
-        name: 'Ravi Garg'
-      }],
-      payload: {},
+      users: USER_CONSTANT,
+      payload: {
+        ...this.resetObj
+      },
       errors: [],
     };
   }
@@ -35,12 +30,7 @@ class CreateArea extends React.Component {
 
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(this.state);
-  }
-
   handleDataUpdate = (event, field, value) => {
-    console.log('hi', event, field, value);
     if (event) {
       event.persist();
       this.setState((state) => ({
@@ -65,16 +55,16 @@ class CreateArea extends React.Component {
       createAreaSuccess,
       createAreaFailed,
     } = this.props;
-    console.log(this.state.payload);
-    if(this.state.payload
+    if (this.state.payload
       && this.state.payload.areaName
-      && this.state.payload.areaLeader
-      && this.state.payload.asstDirector
-      && this.state.payload.facilitators
-    ){
-      console.log(this.state.payload);
+    ) {
       createAreaStarted();
       createAreaSuccess(this.state.payload);
+      this.setState({
+        payload: {
+          ...this.resetObj,
+        },
+      });
     } else {
       // validate for errors
     }
@@ -98,44 +88,41 @@ class CreateArea extends React.Component {
                     </p>
                     <div className="forms-sample">
                       <div className="form-group">
-                      <FormControl style={{minWidth: '100%'}}>
-                        <TextField
-                          required
-                          label="Area Name"
-                          variant="outlined"
-                          onChange={(e) => this.handleDataUpdate(undefined, 'areaName', e.target.value)}
-                        />
-                      </FormControl>
-                      </div>
-                      <div className="form-group">
-                        <FormControl style={{minWidth: '100%'}} variant="outlined" >
-                          <Autocomplete
-                            onChange={(e, newValue) => {this.handleDataUpdate(undefined, 'areaLeader', newValue)}}
-                            options={this.state.users}
-                            getOptionLabel={(option) => option.name}
-                            renderInput={(params) => <TextField required {...params} label="Area Leader" variant="outlined" />}
+                        <FormControl style={{minWidth: '100%'}}>
+                          <TextField
+                            required
+                            label="Area Name"
+                            variant="outlined"
+                            value={this.state.payload.areaName}
+                            onChange={(e) => this.handleDataUpdate(undefined, 'areaName', e.target.value)}
                           />
                         </FormControl>
                       </div>
                       <div className="form-group">
-                        <FormControl style={{minWidth: '100%'}} variant="outlined" >
+                        <FormControl style={{minWidth: '100%'}} variant="outlined">
                           <Autocomplete
-                            onChange={(e, newValue) => {this.handleDataUpdate(undefined, 'asstDirector', newValue)}}
+                            onChange={(e, newValue) => {
+                              this.handleDataUpdate(undefined, 'areaLeader', newValue)
+                            }}
                             options={this.state.users}
                             getOptionLabel={(option) => option.name}
-                            renderInput={(params) => <TextField required {...params} label="Assistant Director" variant="outlined" />}
+                            value={this.state.payload.areaLeader}
+                            renderInput={(params) => <TextField {...params} label="Area Leader"
+                                                                variant="outlined"/>}
                           />
                         </FormControl>
                       </div>
                       <div className="form-group">
-                        <FormControl style={{minWidth: '100%'}} variant="outlined" >
+                        <FormControl style={{minWidth: '100%'}} variant="outlined">
                           <Autocomplete
-                            multiple
-                            limitTags={2}
+                            onChange={(e, newValue) => {
+                              this.handleDataUpdate(undefined, 'asstDirector', newValue)
+                            }}
                             options={this.state.users}
-                            onChange={(e, newValue) => {this.handleDataUpdate(undefined, 'facilitators', newValue)}}
                             getOptionLabel={(option) => option.name}
-                            renderInput={(params) => <TextField required {...params} label="Facilitators" variant="outlined" />}
+                            value={this.state.payload.asstDirector}
+                            renderInput={(params) => <TextField {...params} label="Assistant Director"
+                                                                variant="outlined"/>}
                           />
                         </FormControl>
                       </div>

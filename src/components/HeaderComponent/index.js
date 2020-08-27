@@ -4,9 +4,10 @@ import {Link, withRouter} from "react-router-dom";
 import {ROUTE} from "../../constants";
 import { connect } from 'react-redux';
 import {
-  logoutUser,
+  logoutUserFailed,
+  logoutUserStarted,
+  logoutUserSuccess,
 } from '../../actions/user';
-import {signOut} from "../../utils";
 
 class HeaderComponent extends React.Component {
 
@@ -17,12 +18,13 @@ class HeaderComponent extends React.Component {
     }
   }
 
-  onLogoutSuccess = () => {
+  onLogout = () => {
     const {
       history,
-      logoutUser,
+      logoutUserSuccess,
     } = this.props;
-    logoutUser();
+    logoutUserSuccess();
+    localStorage.removeItem('ADMIN_AUTH_KEY');
     history.push(ROUTE.LOGIN);
   };
 
@@ -181,7 +183,7 @@ class HeaderComponent extends React.Component {
                   <i className="mdi mdi-settings text-primary"></i>
                   Settings
                 </a>
-                <a className="dropdown-item" onClick={() => signOut(this.onLogoutSuccess)}>
+                <a className="dropdown-item" onClick={this.onLogout}>
                   <i className="mdi mdi-logout text-primary"></i>
                   Logout
                 </a>
@@ -199,12 +201,16 @@ class HeaderComponent extends React.Component {
 }
 
 const mapDispatchToProps = {
-  logoutUser,
+  logoutUserStarted,
+  logoutUserSuccess,
+  logoutUserFailed,
 };
 
 HeaderComponent.propTypes = {
   history: PropTypes.object.isRequired,
-  logoutUser: PropTypes.func.isRequired,
+  logoutUserStarted: PropTypes.func.isRequired,
+  logoutUserSuccess: PropTypes.func.isRequired,
+  logoutUserFailed: PropTypes.func.isRequired,
   user: PropTypes.object,
 };
 
