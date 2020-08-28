@@ -1,7 +1,9 @@
 import axiosInstance from "../config/axios";
 import {loginUserFailed, loginUserStarted, loginUserSuccess} from "../actions/user";
 
-export const loginAdmin = (loginData, resolve = () => {}, reject = () => {}) => (dispatch) => {
+export const loginAdmin = (loginData, resolve = () => {
+}, reject = () => {
+}) => (dispatch) => {
   dispatch(loginUserStarted());
   axiosInstance.post('/users/admin-login', loginData, {
     headers: {
@@ -15,5 +17,19 @@ export const loginAdmin = (loginData, resolve = () => {}, reject = () => {}) => 
     .catch((err) => {
       dispatch(loginUserFailed(err));
       reject(err);
+    });
+}
+
+export const validateToken = (token = localStorage.getItem('ADMIN_AUTH_KEY')) => (dispatch) => {
+  dispatch(loginUserStarted());
+  axiosInstance.get('/users/profile', {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  }).then((response) => {
+    dispatch(loginUserSuccess(response.data.result));
+  })
+    .catch((err) => {
+      dispatch(loginUserFailed(err));
     });
 }

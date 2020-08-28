@@ -10,14 +10,21 @@ import CreateArea from "./pages/AreaPage/createArea";
 import UpdateArea from "./pages/AreaPage/updateArea";
 import {LOADER_ON} from "./constants/loader";
 import './App.css';
+import {validateToken} from "./services/user";
 
 class App extends React.PureComponent {
+  componentDidMount() {
+    const token = localStorage.getItem('ADMIN_AUTH_KEY');
+    if (token) {
+      this.props.validateToken(token);
+    }
+  }
+
   render() {
     const {
       user,
       loader,
     } = this.props;
-    console.log(loader, user);
     return (
       <div className="app-container">
         <div className="container-scroller">
@@ -34,7 +41,7 @@ class App extends React.PureComponent {
                 path={ROUTE.CREATE_AREA}
                 component={CreateArea}
                 user={user && user.data}
-                />
+              />
               <PrivateRoute
                 exact
                 path={ROUTE.UPDATE_AREA}
@@ -53,9 +60,11 @@ class App extends React.PureComponent {
           </BrowserRouter>
           {/*page-body-wrapper ends*/}
         </div>
-        {this.props.loader.status === LOADER_ON && <div className="loader">
-          Loading...
-        </div>}
+        {this.props.loader.status === LOADER_ON && (
+          <div className="loader">
+            Loading...
+          </div>
+        )}
       </div>
     )
   }
@@ -66,11 +75,14 @@ const mapStateToProps = (state) => ({
   loader: state.loaderReducer,
 });
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = {
+  validateToken,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const PrivateRoute = ({component: Component, path, user, ...rest}) => {
-  console.log('user', user);
-  if (localStorage.getItem('ADMIN_AUTH_KEY') ||(user && user.userRole === 6) ) {
+  if (user && user.userRole === 6) {
     // TODO:Instead of this condition we have to use isLoggedIn util which checks whether token exists, then verify it from backend and save verified userData in redux
     return (
       <Route {...rest} path={path} render={(props) => (

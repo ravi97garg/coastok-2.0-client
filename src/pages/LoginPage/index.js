@@ -20,8 +20,6 @@ class LoginPage extends React.Component {
       history,
       loginUserSuccess,
     } = this.props;
-    console.log('userData fetched succesfully');
-    console.log('>>>>>>>>',userData.tokenId);
     loginUserSuccess(userData);
     history.push(ROUTE.DASHBOARD);
   };
@@ -36,7 +34,16 @@ class LoginPage extends React.Component {
     const {
       user
     } = this.props;
-    if(localStorage.getItem('ADMIN_AUTH_KEY')){
+    if (user && user.data) {
+      this.props.history.push(ROUTE.DASHBOARD);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const {
+      user
+    } = this.props;
+    if (user && user.data) {
       this.props.history.push(ROUTE.DASHBOARD);
     }
   }
@@ -74,7 +81,6 @@ class LoginPage extends React.Component {
                   {/*  onSuccess={this.onLoginSuccess}*/}
                   {/*  onFailure={this.props.loginUserFailed}*/}
                   {/*  onRequest={() => {*/}
-                  {/*    console.log('hi user started login');*/}
                   {/*    this.props.loginUserStarted();*/}
                   {/*  }}*/}
                   {/*  isSignedIn*/}
@@ -125,10 +131,6 @@ const mapDispatchToProps = {
 
 LoginPage.propTypes = {
   history: PropTypes.object.isRequired,
-  loginUserFailed: PropTypes.func.isRequired,
-  loginUserSuccess: PropTypes.func.isRequired,
-  loginUserStarted: PropTypes.func.isRequired,
-  logoutUser: PropTypes.func.isRequired,
   user: PropTypes.object,
 };
 
