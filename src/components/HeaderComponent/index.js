@@ -175,8 +175,8 @@ class HeaderComponent extends React.Component {
             </li>
             <li className="nav-item nav-profile dropdown">
               <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                <img src={user && user.profileObj && user.profileObj.imageUrl} alt="profile"/>
-                <span className="nav-profile-name">{user && user.profileObj && user.profileObj.name}</span>
+                <img src={(user && user.imageUrl) || 'images/avatar-icon.png'} alt="profile"/>
+                <span className="nav-profile-name">{user && user.name}</span>
               </a>
               <div className="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <a className="dropdown-item">
