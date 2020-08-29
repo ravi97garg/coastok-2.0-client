@@ -1,0 +1,50 @@
+{"data": [
+  {
+    "_id": "5f43ea1c2597f72daa4f4ccd",
+    "code": "JISA",
+    "name": "Jia Sarai",
+    "areaLeader": "5f47897c5c38e45aab7f2601",
+    "asstDirector":"5f47897c5c38e45aab7f260b",
+    "minChanting":4
+  },
+  {
+    "_id": "5f43ea1c2597f72daa4f4cce",
+    "code": "PAN",
+    "name": "Pantnagar",
+    "areaLeader": "5f47897c5c38e45aab7f2603",
+    "asstDirector": "5f47897c5c38e45aab7f2602",
+    "minChanting": 4
+  },
+  {
+    "_id": "5f43ea1c2597f72daa4f4ccf",
+    "code": "BALY",
+    "name": "Bariely",
+    "areaLeader": "5f47897c5c38e45aab7f2604",
+    "asstDirector": "5f47897c5c38e45aab7f26bf",
+    "minChanting": 4
+  },
+  {
+    "_id": "5f43ea1c2597f72daa4f4cd0",
+    "code": "GZB",
+    "name": "Ghaziabad",
+    "areaLeader": "",
+    "asstDirector": "",
+    "minChanting": 4
+  },
+  {
+    "_id": "5f43ea1c2597f72daa4f4cd1",
+    "code": "SANA",
+    "name": "Sant Nagar",
+    "areaLeader": "5f47897c5c38e45aab7f260b",
+    "asstDirector": "5f47897c5c38e45aab7f2602",
+    "minChanting": 4
+  },
+  {
+    "_id": "5f43ea1c2597f72daa4f4cd2",
+    "code": "JP",
+    "name": "Jaipur",
+    "areaLeader": "",
+    "asstDirector": "5f47897c5c38e45aab7f26bf",
+    "minChanting": 4
+  }
+]}
