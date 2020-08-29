@@ -80,8 +80,8 @@ class HomePage extends React.PureComponent {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="hero-content text-center">
-                    <h1 className="text-white">COASTOK <br/>
-                      Connect A Soul To Krishna</h1>
+                    <h1 className="text-white">COASTOK</h1>
+                    <h4 className="text-white">Connect A Soul To Krishna</h4>
                     <div className="ht-btn-area hero-boder-top">
                       <Link to={ROUTE.DASHBOARD} className="hero-btn">Dashboard</Link>
                     </div>

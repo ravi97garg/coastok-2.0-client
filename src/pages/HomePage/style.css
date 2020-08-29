@@ -1,25 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Open+Sans:300,400,600,700,800|Playfair+Display:400,500,600,700,800,900&amp;display=swap");
-
-*, *::after, *::before {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box
-}
-
-html, body {
-    height: 100%
-}
-
-body {
-    line-height: 1.74;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    visibility: visible;
-    font-family: "Open Sans", sans-serif;
-    color: #04002A;
-    position: relative;
-    background-color: #ffffff
-}
+/*@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Open+Sans:300,400,600,700,800|Playfair+Display:400,500,600,700,800,900&amp;display=swap");*/
 
 .no-overflow {
     overflow: hidden
@@ -30,7 +9,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 0;
     line-height: 1.3;
-    font-family: "Libre Baskerville", serif
 }
 
 h1 {
@@ -2940,7 +2918,6 @@ input[type="checkbox"] {
     color: #ffffff;
     margin-bottom: 0px;
     padding-bottom: 15px;
-    font-family: "Open Sans", sans-serif
 }
 
 .footer-title::after {
@@ -3450,7 +3427,6 @@ input[type="checkbox"] {
 .single-foundation .foundation-content .location h5 {
     color: #ffff;
     font-weight: 600;
-    font-family: "Open Sans", sans-serif;
     margin-bottom: 6px
 }
 

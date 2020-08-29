@@ -68,7 +68,7 @@ class LoginPage extends React.Component {
               <div className="col-lg-4 mx-auto">
                 <div className="auth-form-light text-left py-5 px-4 px-sm-5 auth-form">
                   <div className="brand-logo">
-                    <img src="../../images/pp.jpeg" alt="logo"/>
+                    <img src="dashboardv1/images/pp.jpeg" alt="logo"/>
                   </div>
                   <h4>COASTOK Admin Panel</h4>
                   <h6 className="font-weight-light">Sign in to continue.</h6>

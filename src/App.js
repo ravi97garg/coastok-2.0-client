@@ -102,7 +102,7 @@ const PrivateRoute = ({component: Component, path, user, ...rest}) => {
     <Route
       {...rest}
       path={path}
-      render={(props) => <Redirect {...props} to={ROUTE.DASHBOARD}/>
+      render={(props) => <Redirect {...props} to={ROUTE.LOGIN}/>
       }
     />
   )
