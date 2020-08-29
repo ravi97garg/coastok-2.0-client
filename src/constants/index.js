@@ -7,10 +7,10 @@ export const ACTION_STATUS = {
 };
 export const ROUTE = {
   HOME: '/',
-  LOGIN: '/login',
-  DASHBOARD: '/',
-  CREATE_AREA: '/createArea',
-  UPDATE_AREA: '/updateArea',
+  LOGIN: '/dashboardv1/login',
+  DASHBOARD: '/dashboardv1/',
+  CREATE_AREA: '/dashboardv1/createArea',
+  UPDATE_AREA: '/dashboardv1/updateArea',
 }
 
 export const USER_CONSTANT = [{

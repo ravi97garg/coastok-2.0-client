@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderComponent from "./components/HeaderComponent";
-import HomePage from "./pages/HomePage";
+import DashboardPage from "./pages/DashboardPage";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import {ROUTE} from "./constants";
 import LoginPage from "./pages/LoginPage";
@@ -11,6 +11,7 @@ import UpdateArea from "./pages/AreaPage/updateArea";
 import {LOADER_ON} from "./constants/loader";
 import './App.css';
 import {validateToken} from "./services/user";
+import HomePage from "./pages/HomePage";
 
 class App extends React.PureComponent {
   componentDidMount() {
@@ -33,7 +34,7 @@ class App extends React.PureComponent {
               <PrivateRoute
                 exact
                 path={ROUTE.DASHBOARD}
-                component={HomePage}
+                component={DashboardPage}
                 user={user && user.data}
               />
               <PrivateRoute
@@ -52,6 +53,11 @@ class App extends React.PureComponent {
                 exact
                 path={ROUTE.LOGIN}
                 component={LoginPage}
+              />
+              <Route
+                exact
+                path={ROUTE.HOME}
+                component={HomePage}
               />
               <Route
                 component={NotFoundPage}
@@ -96,7 +102,7 @@ const PrivateRoute = ({component: Component, path, user, ...rest}) => {
     <Route
       {...rest}
       path={path}
-      render={(props) => <Redirect {...props} to={'/login'}/>
+      render={(props) => <Redirect {...props} to={ROUTE.DASHBOARD}/>
       }
     />
   )
