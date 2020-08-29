@@ -8,7 +8,7 @@ class SideBarComponent extends React.Component {
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <ul className="nav">
           <li className="nav-item">
-            <Link to={ROUTE.HOME} className="nav-link">
+            <Link to={ROUTE.DASHBOARD} className="nav-link">
               <i className="mdi mdi-home menu-icon"></i>
               <span className="menu-title">Dashboard</span>
             </Link>
