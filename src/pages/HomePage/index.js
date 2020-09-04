@@ -14,7 +14,7 @@ class HomePage extends React.PureComponent {
                 <div className="col-lg-12 d-flex align-items-center">
                   <div className="header__logo">
                     <div style={{width: '50px'}} className="logo">
-                      <Link style={{width: '100%'}} to={ROUTE.HOME}><img style={{width: '100%'}} src="images/pp.jpeg" alt=""/></Link>
+                      <Link style={{width: '100%'}} to={ROUTE.HOME}><img style={{width: '100%'}} src="../images/pp.jpeg" alt=""/></Link>
                     </div>
                   </div>
                   <div className="header-right">

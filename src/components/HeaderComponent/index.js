@@ -51,8 +51,8 @@ class HeaderComponent extends React.Component {
       <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div className="navbar-brand-wrapper d-flex justify-content-center">
           <div className="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-            <Link to={ROUTE.DASHBOARD} className="navbar-brand brand-logo"><img src="dashboardv1/images/pp.jpeg" alt="logo"/></Link>
-            <Link to={ROUTE.DASHBOARD} className="navbar-brand brand-logo-mini"><img src="dashboardv1/images/pp.jpeg"
+            <Link to={ROUTE.DASHBOARD} className="navbar-brand brand-logo"><img src="../images/pp.jpeg" alt="logo"/></Link>
+            <Link to={ROUTE.DASHBOARD} className="navbar-brand brand-logo-mini"><img src="../images/pp.jpeg"
                                                                                alt="logo"/></Link>
             <button className="navbar-toggler navbar-toggler align-self-center" type="button"
                     onClick={this.toggleSideBarOpen}>
